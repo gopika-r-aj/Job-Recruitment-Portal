@@ -1,0 +1,76 @@
+{% extends 'Company/Head.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+   
+    <title>Internship</title>
+</head>
+<body>
+    <br><br><br><br>
+<div id="tab" align="center">
+    <form action="" method="post">
+      {% csrf_token %} 
+        <table align="center" border="1">
+            <tr>
+                <td>Title</td>
+                <td><input type="text" name="txt_title" id="" autocomplete="off" placeholder="Enter title" required=""></td>
+            </tr>
+            <tr>
+                <td>Post</td>
+                <td><input type="text" name="txt_post" id="" autocomplete="off" placeholder="Enter post" required=""></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td><input type="date" name="txt_date" id="" autocomplete="off" placeholder="Enter date" required=""></td>
+            </tr>
+            <tr>
+                <td>Duration</td>
+                <td><input type="text" name="txt_duration" id="" autocomplete="off" placeholder="Enter duration" required=""></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td><textarea name="txt_details" cols="20" rows="5" autocomplete="off" placeholder="Enter details" required=""></textarea></td>
+            </tr>
+            <tr>
+                <td>Stipend</td>
+                <td><input type="text" name="txt_stipend" id="" autocomplete="off" placeholder="Enter stipend" required=""></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2"><input type="submit" name="submit" value="Save">
+                <input type="reset" name="Cancel" value="Cancel"></td>
+            </tr>
+        </table>
+        <br><br>
+        <table align="center" border="1">
+             <tr>
+                <td>SI NO.</td>
+                <td>Title</td>
+                <td>Post</td>
+                <td>Date</td>
+                <td>Duration</td>
+                <td>Details</td>
+                <td>Stipend</td>
+                <td>Action</td>
+             </tr>
+             {% for i in INT %}
+             <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.int_title}}</td>
+                <td>{{i.int_post}}</td>
+                <td>{{i.int_date}}</td>
+                <td>{{i.int_duration}}</td>
+                <td>{{i.int_details}}</td>
+                <td>{{i.int_stipend}}</td>
+                <td><a href="{% url 'webcompany:Del_Internship' i.id %}">Delete</a></td>
+             </tr>
+             {% endfor %}
+        </table>
+    </form>
+</div>
+</body>
+</html>
+
+<br><br><br><br><br><br><br>
+
+{% endblock content %}

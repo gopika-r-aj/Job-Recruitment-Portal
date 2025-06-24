@@ -1,0 +1,49 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <title>Designation</title>
+</head>
+    <body>
+        <br><br><br><br>
+<div id="tab" align="center">
+        <form action="" method="post">
+            {% csrf_token %}
+            <table border="1" align="center">
+                <tr >
+                    <td>Designation</td>
+                    <td><input type="text" name="txt_designation" id="" autocomplete="off" placeholder="Enter Designation" required=""></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" name="txt_submit" value="Save">
+                        <input type="reset" name="txt_cancel" value="Cancel">
+                    </td>
+                </tr>
+            </table>   
+            <br><br><br>
+            <table align="center" border="1">
+                <tr>
+                    <td>SI NO.</td>
+                    <td>Designation</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in DS %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{i.designation_name}}</td>
+                    <td><a href="{% url 'webadmin:del_dsg' i.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </table>  
+        </form>
+    </div>
+    </body>
+</html>
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+ {% endblock content %}

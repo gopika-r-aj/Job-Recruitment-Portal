@@ -1,0 +1,52 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br><br><br>
+<div id="tab" align="center">
+    <table border="1" align="center">
+        <tr>
+            <td>SI NO.</td>
+            <td>Title</td>
+            <td>Designation</td>
+            <td>Date</td>
+            <td>Salary</td>
+            <td>Details</td>
+            <td>Action</td>
+         </tr>
+         {% for i in PlcApplctn %}
+         <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{i.placement.plc_title}}</td>
+            <td>{{i.placement.plc_designation}}</td>
+            <td>{{i.placement.plc_date}}</td>
+            <td>{{i.placement.plc_salary}}</td>
+            <td>{{i.placement.plc_details}}</td>
+            <td>
+                {% if i.plcapply_sts == 1 %}
+                <p>Application Accepted</p>
+                {% elif i.plcapply_sts == 2 %}
+                <p>Rejected!!</p>
+                {% else %}
+                <p>Pending...</p>
+                {% endif %}
+            </td>
+         </tr>
+         {% endfor %}
+    </table>
+
+</div>
+
+</body>
+</html>
+
+<br><br><br><br><br><br><br>
+
+{% endblock content %}

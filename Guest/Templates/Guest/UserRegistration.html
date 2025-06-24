@@ -1,0 +1,133 @@
+{% extends 'Guest/Head.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+    
+<br><br><br><br>
+<div id="tab" align="center">
+    <form action="" method="post" enctype="multipart/form-data" id="UserForm" data-places-url="{% url 'webguest:Ajax_Place' %}" 
+    data-course-url="{% url 'webguest:Ajax_Course' %}">
+        {% csrf_token %}
+        <table border="11" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id="" autocomplete="off" placeholder="Enter Name" required=""></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact" id="" autocomplete="off" placeholder="Enter Contact" pattern="[0-9]{10}" required=""></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="txt_email" id="" autocomplete="off" placeholder="Enter Email" required="" pattern="[^ @]*@[^ @]*"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" id="gender" value="Male" required="">Male
+                    <input type="radio" name="gender" id="gender" value="Female" required="">Female
+                    <input type="radio" name="gender" id="gender" value="Others" required="">Others
+                </td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td><textarea name="txt_address" id="" cols="30" rows="10" autocomplete="off" placeholder="Enter Address" required=""></textarea></td>
+            </tr>
+            <tr>
+                <td>Graduation</td>
+                <td><input type="text" name="txt_graduation" id="" autocomplete="off" placeholder="Enter Graduation" required=""></td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td><select name="sel_department" id="dept" required="">
+                    <option value="">-----Select-----</option>
+                    {% for i in DEP %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>Course</td>
+                <td><select name="sel_course" id="cou" required="">
+                    <option value="">-----Select-----</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>District</td>
+                <td><select name="sel_district" id="dist" required="">
+                    <option value="">-----Select-----</option>
+                    {% for i in DS %}
+                    <option value="{{i.id}}">{{i}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td>Place</td>
+                <td><select name="sel_place" id="plc" required="">
+                    <option value="">-----Select-----</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txt_file" id=""></td>
+            </tr>
+            <tr>
+                <td>Proof</td>
+                <td><input type="file" name="txt_proof" id=""></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="txt_password" id="" autocomplete="off" placeholder="Enter Password" required=""></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="txt_save" value="Save">
+                    <input type="reset" name="txt_cancel" value="Cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#dist").change(function () {
+            var did = $(this).val();
+            var ur = $("#UserForm").attr("data-places-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: did, },
+                success: function (data) {
+                    $("#plc").html(data);
+                },
+            });
+        });
+
+
+        $("#dept").change(function () {
+            var dpid = $(this).val();
+            var ur = $("#UserForm").attr("data-course-url");
+            $.ajax({
+                url: ur,
+                data: { DIST: dpid, },
+                success: function (data) {
+                    $("#cou").html(data);
+                },
+            });
+        });
+
+        
+
+        
+</script>
+
+
+<br><br><br><br><br><br><br>
+
+{% endblock content %}

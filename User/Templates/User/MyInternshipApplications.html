@@ -1,0 +1,61 @@
+{% extends 'User/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br><br><br>
+<div id="tab" align="center">
+    <table align="center" border="1">
+        <tr>
+            <th>SI NO.</th>
+            <th>Username</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Apply Date</th>
+            <th>Internship Title</th>
+            <th>Post</th>
+            <th>Date</th>
+            <th>Duration</th>
+            <th>Details</th>
+            <th>Action</th>
+        </tr>
+        {% for i in IntApplctn %}
+        <tr>    
+            <td>{{ forloop.counter }}</td>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.user.user_contact}}</td>
+            <td>{{i.user.user_email}}</td>
+            <td>{{i.apply_date}}</td>
+            <td>{{i.internship.int_title}}</td>
+            <td>{{i.internship.int_post}}</td>
+            <td>{{i.internship.int_date}}</td>
+            <td>{{i.internship.int_duration}}</td>
+            <td>{{i.internship.int_details}}</td>
+            <td>
+                {% if i.intapply_sts == 1 %}
+                <p>Application Accepted</p>
+                {% elif i.intapply_sts == 2 %}
+                <p>Rejected!!</p>
+                {% else %}
+                <p>Pending...</p>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+</body>
+</html>
+
+
+<br><br><br><br><br><br><br>
+
+{% endblock content %}

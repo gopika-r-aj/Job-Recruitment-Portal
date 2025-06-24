@@ -1,0 +1,51 @@
+{% extends 'Admin/Head.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+    <title>Company Verification</title>
+</head>
+<body>
+    <br><br><br><br>
+<div id="tab" align="center">
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>SI No</td>
+                <td>Companyname</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>Logo</td>
+                <td>Proof</td>
+                <td>District</td>
+                <td>Place</td>
+                <td>Action</td>
+            </tr>
+            {% for i in CV %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{i.company_name}}</td>
+                <td>{{i.company_contact}}</td>
+                <td>{{i.company_email}}</td>
+                <td>{{i.company_address}}</td>
+                <td><img src="{{i.company_logo.url}}" alt="img" width="120px" height="120px"></td>
+                <td><img src="{{i.company_proof.url}}" alt="img" width="120px" height="120px"></td>
+                <td>{{i.place.district}}</td>
+                <td>{{i.place}}</td>
+                <td><a href="{% url 'webadmin:reject_company' i.id %}">Reject</a></td>       
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+</body>
+</html>
+
+
+
+<br><br><br><br><br><br><br><br><br><br>
+
+ {% endblock content %}

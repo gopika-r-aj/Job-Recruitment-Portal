@@ -1,0 +1,52 @@
+{% extends 'Company/Head.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br><br><br><br>
+<div id="tab" align="center">
+    
+    <table border="1" align="center">
+        <tr>
+            <th>SI NO.</th>
+            <th>Username</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Title</th>
+            <th>Designation</th>
+            <th>Date</th>
+            <th>Salary</th>
+            <th>Details</th>
+            <th>Action</th>
+         </tr>
+         {% for i in PlcApplctn %}
+         <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.user.user_contact}}</td>
+            <td>{{i.user.user_email}}</td>
+            <td>{{i.placement.plc_title}}</td>
+            <td>{{i.placement.plc_designation}}</td>
+            <td>{{i.placement.plc_date}}</td>
+            <td>{{i.placement.plc_salary}}</td>
+            <td>{{i.placement.plc_details}}</td>
+            <td><a href="{% url 'webcompany:accept_placement' i.id %}">Accept</a> ||
+            </td>
+         </tr>
+         {% endfor %}
+    </table>
+</div>
+</body>
+</html>
+
+
+<br><br><br><br><br><br><br>
+
+{% endblock content %}
